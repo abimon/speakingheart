@@ -17,6 +17,11 @@ class HomeController extends Controller
         $articles = Article::where('isPosted',true)->orderBy('created_at', 'desc')->get();
         return view('articles', compact('articles'));
     }
+    public function books()
+    {
+        $books = Book::orderBy('created_at', 'desc')->get();
+        return view('books', compact('books'));
+    }
     public function dashboard()
     {
         if(Auth::user()->isAdmin){

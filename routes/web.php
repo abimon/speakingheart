@@ -25,6 +25,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'home');
     Route::get('/dashboard', 'dashboard');
     Route::get('/articles/{slug}','article');
+    Route::get('/books','books');
     Route::get('/poetry','poems');
     Route::get('/poetry/{slug}','poem');
 });
