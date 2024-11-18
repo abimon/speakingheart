@@ -12,18 +12,17 @@ use App\Http\Controllers\PcommentController;
 use App\Http\Controllers\PlikeController;
 use App\Http\Controllers\PoetryController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\isAdmin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard.home');
-});
+
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'home');
-    Route::get('/dashboard', 'dashboard');
+    Route::get('/dashboard', 'dashboard')->middleware(isAdmin::class);
     Route::get('/articles/{slug}','article');
     Route::get('/books','books');
     Route::get('/poetry','poems');
@@ -37,7 +36,7 @@ Route::resources([
     'plike'=>PlikeController::class,
     'mlike'=>MlikeController::class,
 ]);
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth',isAdmin::class])->group(function () {
     Route::resources([
         'poems' => PoetryController::class,
         'posts' => ArticleController::class,

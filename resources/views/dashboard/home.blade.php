@@ -153,6 +153,7 @@
     <div class="bg-secondary text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h6 class="mb-0">Books</h6>
+            @if (Auth()->user()->isAdmin)
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#bookupload"><i
                     class="fa fa-upload"></i> Upload
             </button>
@@ -215,6 +216,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
         <div class="table-responsive">
             <table class="table text-start align-middle table-bordered table-hover mb-0">
