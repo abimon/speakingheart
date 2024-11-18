@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Aview;
+use App\Models\Book;
 use App\Models\Poetry;
 use App\Models\Pview;
 use Illuminate\Http\Request;
@@ -21,12 +22,13 @@ class HomeController extends Controller
         if(Auth::user()->isAdmin){
             $pitems = Poetry::all();
             $aitems = Article::all();
+            $books = Book::all();
         }
         else{
             $pitems = Poetry::where('user_id',Auth::user()->id)->get();
             $aitems = Article::where('user_id',Auth::user()->id)->get();
         }
-        return view('dashboard.home',compact('pitems','aitems'));
+        return view('dashboard.home',compact('pitems','aitems','books'));
     }
     public function article($slug)
     {

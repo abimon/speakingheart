@@ -12,7 +12,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::all();
+        return view('dashboard.books.index',compact('books'));
     }
 
     /**
@@ -28,7 +29,17 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(request()->hasFile('cover')){
+            $extension = request()->file('cover')->getClientOriginalExtension();
+            $path = uniqid() . time() . '.' . $extension;
+            request()->file('cover')->storeAs('/books', $path);
+        }
+        Book::create([
+            'path'=>$path,
+            'title'=>request('title'),
+            'author'=>request('author'),
+        ]);
+        return back()->with('success','Book uploaded successfully.');
     }
 
     /**

@@ -12,6 +12,7 @@ use App\Http\Controllers\PcommentController;
 use App\Http\Controllers\PlikeController;
 use App\Http\Controllers\PoetryController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -44,4 +45,4 @@ Route::middleware('auth')->group(function () {
         'user'=>UserController::class
     ]);
 });
-require __DIR__ . '/auth.php';
+Auth::routes();
